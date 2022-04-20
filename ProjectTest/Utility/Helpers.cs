@@ -35,7 +35,7 @@ namespace ProjectTest.Utility
 
         public static async Task SaveTxtFileStores(string fileName, List<TrStores> dataList)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "PromotionFile", (fileName + ".txt"));
+            var filePath = Path.Combine("Resources", "PromotionFile", (fileName + ".txt"));
             // Create a file to write to.
             using (StreamWriter sw = System.IO.File.CreateText(filePath))
             {
@@ -51,7 +51,7 @@ namespace ProjectTest.Utility
 
         public static async Task SaveTxtFilePromotion(string fileName, TrPromotion data)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "PromotionFile", (fileName + ".txt"));
+            var filePath = Path.Combine("Resources", "PromotionFile", (fileName + ".txt"));
             // Create a file to write to.
             using (StreamWriter sw = System.IO.File.CreateText(filePath))
             {

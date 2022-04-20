@@ -34,8 +34,7 @@ namespace ProjectTest.Controllers
 
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), "Resources");
             var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            var fullPath = Path.Combine(pathToSave, fileName);
-            var dbPath = Path.Combine("Resources", fileName);
+            var fullPath = Path.Combine("Resources", fileName);
 
             await using (var stream = new FileStream(fullPath, FileMode.Create))
             {
