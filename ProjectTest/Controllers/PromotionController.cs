@@ -1,4 +1,5 @@
 ﻿using ExcelDataReader;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectTest.Data;
@@ -18,10 +19,12 @@ namespace ProjectTest.Controllers
     public class PromotionController : BaseApiController
     {
         private readonly DataContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public PromotionController(DataContext context)
+        public PromotionController(DataContext context, IWebHostEnvironment env)
         {
             this._context = context;
+            this._env = env;
         }
 
         #region Transaction
@@ -32,7 +35,7 @@ namespace ProjectTest.Controllers
             var formCollection = await Request.ReadFormAsync();
             var file = formCollection.Files.First();
 
-            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), "Resources");
+            var pathToSave = Path.Combine(_env.WebRootPath, "Resources");
             var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
             var fullPath = Path.Combine("Resources", fileName);
 
@@ -99,8 +102,8 @@ namespace ProjectTest.Controllers
             await _context.SaveChangesAsync();
 
             // save to file txt
-            await Utility.Helpers.SaveTxtFilePromotion(formatId, promotionData);
-            await Utility.Helpers.SaveTxtFileStores("promo_"+formatId, storeData);
+            await Utility.Helpers.SaveTxtFilePromotion(formatId, promotionData, _env);
+            await Utility.Helpers.SaveTxtFileStores("promo_"+formatId, storeData, _env);
 
             return new PayloadDto
             {

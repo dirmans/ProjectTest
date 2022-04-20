@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using ProjectTest.Data;
 using ProjectTest.DTOs;
 using ProjectTest.Model;
@@ -33,9 +34,9 @@ namespace ProjectTest.Utility
             return formatId;
         }
 
-        public static async Task SaveTxtFileStores(string fileName, List<TrStores> dataList)
+        public static async Task SaveTxtFileStores(string fileName, List<TrStores> dataList, IWebHostEnvironment _env)
         {
-            var filePath = Path.Combine("Resources", "PromotionFile", (fileName + ".txt"));
+            var filePath = Path.Combine(_env.WebRootPath, "Resources", "PromotionFile", (fileName + ".txt"));
             // Create a file to write to.
             using (StreamWriter sw = System.IO.File.CreateText(filePath))
             {
@@ -49,9 +50,9 @@ namespace ProjectTest.Utility
             }
         }
 
-        public static async Task SaveTxtFilePromotion(string fileName, TrPromotion data)
+        public static async Task SaveTxtFilePromotion(string fileName, TrPromotion data, IWebHostEnvironment _env)
         {
-            var filePath = Path.Combine("Resources", "PromotionFile", (fileName + ".txt"));
+            var filePath = Path.Combine(_env.WebRootPath, "Resources", "PromotionFile", (fileName + ".txt"));
             // Create a file to write to.
             using (StreamWriter sw = System.IO.File.CreateText(filePath))
             {
