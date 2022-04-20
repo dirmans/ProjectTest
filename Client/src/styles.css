@@ -1,0 +1,96 @@
+/* You can add global styles to this file, and also import other style files */
+@import './assets/plugins/fontawesome-free/css/all.min.css';
+@import './assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
+@import './assets/dist/css/adminlte.min.css';
+@import './assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
+/* Mandatory */
+@import '~ng-wizard/themes/ng_wizard.min.css';
+
+/* Optional */
+/* If a theme other than default is used, the css file for that theme is required. */
+@import '~ng-wizard/themes/ng_wizard_theme_arrows.min.css';
+@import '~ng-wizard/themes/ng_wizard_theme_circles.min.css';
+@import '~ng-wizard/themes/ng_wizard_theme_dots.min.css';
+
+/* Material Theme */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+  color: rgb(255 255 255 / 87%);
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  font-weight: 500;
+  padding: 0.5rem;
+  background-color: #fd7e14;
+}
+
+.card-primary:not(.card-outline)>.card-header {
+  background-color: #fd7e14;
+}
+
+.p-input-icon-left,
+.p-input-icon-right {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+  font-weight: 500;
+}
+
+.btn-orange {
+  color: #fff;
+  background-color: #fd7e14;
+  border-color: #fd7e14;
+  box-shadow: none;
+}
+
+.custom-control-input.is-valid~.custom-control-label,
+.was-validated .custom-control-input:valid~.custom-control-label {
+  color: #302e2e;
+}
+
+.custom-control-input.is-valid~.custom-control-label::before,
+.was-validated .custom-control-input:valid~.custom-control-label::before {
+  border-color: #302e2e;
+}
+
+.p-float-label {
+  display: block;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.form-group {
+  margin-bottom: 0rem;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #fd7e14;
+}

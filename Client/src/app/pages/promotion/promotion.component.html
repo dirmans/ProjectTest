@@ -1,0 +1,212 @@
+<app-nav></app-nav>
+<app-sidebar></app-sidebar>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a routerLink="/home"><i class="fa fa-home"></i> Home</a></li>
+            <li class="breadcrumb-item active">Promotion</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  <p-toast [style]="{marginTop: '80px'}"></p-toast>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Promotion Page</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="promotionForm">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="p-fluid p-grid p-formgrid">
+                  <div class="form-group">
+                    <span class="p-float-label">
+                      <input pInputText formControlName="promoId" [disabled]="isDisabled" />
+                      <label for="promotionId">Promo ID</label>
+                    </span>
+                  </div>
+                  <div class="form-group">
+                    <span class="p-float-label">
+                      <p-dropdown [options]="listPromoType" formControlName="promoType" [filter]="false"
+                        [autoDisplayFirst]="false" filterBy="name" optionValue="name" optionLabel="name" [ngClass]="{'ng-invalid ng-dirty': promoType.errors && (promoType.touched || promoType.dirty),
+                     'is-valid':promoType.valid}"></p-dropdown>
+                      <label for="promoType">Promo Type</label>
+                    </span>
+                    <div *ngIf="promoType.invalid && (promoType.dirty || promoType.touched)">
+                      <small *ngIf="promoType.errors?.required" style="color: red;">Promo type is required.</small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="form-group">
+                          <span class="p-float-label">
+                            <p-dropdown [options]="listValueType" [filter]="false" (onChange)="selectValueType($event)"
+                              [autoDisplayFirst]="false" filterBy="name" optionValue="name" optionLabel="name"
+                              formControlName="valueType" [ngClass]="{'ng-invalid ng-dirty': valueType.errors && (valueType.touched || valueType.dirty),
+                              'is-valid':valueType.valid}">
+                            </p-dropdown>
+                            <label for="valueType">Value Type</label>
+                            <div *ngIf="valueType.invalid && (valueType.dirty || valueType.touched)">
+                              <small *ngIf="valueType.errors?.required" style="color: red;">Value type
+                                is
+                                required.</small>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <div class="form-group" *ngIf="isSelectValueType == 1">
+                          <span class="p-float-label">
+                            <input pInputText formControlName="valuePercentage" type="number" min="0" max="100"
+                              [pKeyFilter]="numberRegex" [ngClass]="{'ng-invalid ng-dirty': valuePercentage.errors && (valuePercentage.touched || valuePercentage.dirty),
+                            'is-valid':valuePercentage.valid}" />
+                            <label for="promotionId">Percentage</label>
+                            <div *ngIf="valuePercentage.invalid && (valuePercentage.dirty || valuePercentage.touched)">
+                              <small *ngIf="valuePercentage.errors?.required" style="color: red;">This value percentage
+                                is
+                                required.</small>
+                              <small *ngIf="valuePercentage.errors?.max" style="color: red;">Max value is 100.</small>
+                            </div>
+                          </span>
+                        </div>
+                        <div class="form-group" *ngIf="isSelectValueType == 2">
+                          <span class="p-float-label">
+                            <input pInputText formControlName="valueAmount" type="number" min="0" max="999999999"
+                              [pKeyFilter]="numberRegex" [ngClass]="{'ng-invalid ng-dirty': valueAmount.errors && (valueAmount.touched || valueAmount.dirty),
+                            'is-valid':valueAmount.valid}" />
+                            <label for="promotionId">Amount</label>
+                            <div *ngIf="valueAmount.invalid && (valueAmount.dirty || valueAmount.touched)">
+                              <small *ngIf="valueAmount.errors?.required" style="color: red;">This value amount is
+                                required.</small>
+                              <small *ngIf="valueAmount.errors?.max" style="color: red;">Max value is
+                                999,999,999.</small>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-fluid p-grid p-formgrid">
+                  <div class="form-group">
+                    <span class="p-float-label">
+                      <input pInputText formControlName="promoDescription" maxlength="30" [ngClass]="{'ng-invalid ng-dirty': promoDescription.errors && (promoDescription.touched || promoDescription.dirty),
+                      'is-valid':promoDescription.valid}" />
+                      <label for="promoDescription">Promo Description</label>
+                    </span>
+                    <div *ngIf="promoDescription.invalid && (promoDescription.dirty || promoDescription.touched)">
+                      <small *ngIf="promoDescription.errors?.required" style="color: red;">Promo description is
+                        required.</small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <span class="p-float-label">
+                      <p-calendar formControlName="promoDuration" inputId="promoDuration" [showIcon]="true"
+                        (onSelect)="selectPromoDuration($event)" dateFormat="dd/mm/yy" selectionMode="range"
+                        [readonlyInput]="true" [showTransitionOptions]="'200ms'" [hideTransitionOptions]="'200ms'"
+                        [showButtonBar]="true" [ngClass]="{'ng-invalid ng-dirty': promoDuration.errors && (promoDuration.touched || promoDuration.dirty),
+                        'is-valid':promoDuration.valid}">
+                      </p-calendar>
+                      <label for="promoType">Promo Duration</label>
+                    </span>
+                    <div *ngIf="promoDuration.invalid && (promoDuration.dirty || promoDuration.touched)">
+                      <small *ngIf="promoDuration.errors?.required" style="color: red;">Promo type is required.</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-5">
+              <div class="col-md-6">
+                <div class="p-fluid p-grid p-formgrid">
+                  <div class="form-group">
+                    <label for="itemPath">Item</label>
+                    <p-fileUpload [files]="file" [customUpload]="true" (uploadHandler)="onUpload($event)"
+                      (onRemove)="onRemove($event)" [maxFileSize]="5000000" [showCancelButton]="false"
+                      accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                      [ngClass]="{'p-inputwrapper-filled': itemPath.value !== '', 'ng-invalid ng-dirty': itemPath.errors && (itemPath.touched || itemPath.dirty),
+                    'is-valid':itemPath.valid}">
+                    </p-fileUpload>
+                    <!-- Validation Field -->
+                    <input type="hidden" name="fileHidden" formControlName="itemPath" />
+                    <div *ngIf="itemPath.invalid && (itemPath.dirty || itemPath.touched)">
+                      <small *ngIf="itemPath.errors?.required" style="color: red;">Resume is required.</small>
+                    </div>
+                    <!-- <div *ngIf="!imageInput">
+                    <small style="color: red;">Resume is required.</small>
+                  </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-fluid p-grid p-formgrid">
+                  <div class="form-group">
+                    <label for="itemPath">Store</label>
+                    <p-card>
+                      <p-table [value]="listStore" [(selection)]="selectedStore" selectionMode="multiple"
+                        (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+                        responsiveLayout="scroll" [paginator]="true" [rows]="5" [metaKeySelection]="false">
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th style="width: 3rem">
+                              <p-button (onClick)="onSelectAll()" *ngIf="itemPath.value != null || undefined">
+                                {{ titleSelect }}
+                              </p-button>
+                            </th>
+                            <th style="min-width:200px">Store</th>
+                            <th style="min-width:200px">Store Name</th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item let-i="rowIndex">
+                          <tr>
+                            <td *ngIf="isSelectAll">
+                              <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                            </td>
+                            <td *ngIf="!isSelectAll">
+                              <p-checkbox [pSelectableRow]="item" [pSelectableRowIndex]="i" [value]="item"></p-checkbox>
+                            </td>
+                            <td>{{item.store}}</td>
+                            <td>{{item.storeName}}</td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                    </p-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button [disabled]="!promotionForm.valid" pButton pRipple type="button" label="Submit" icon="pi pi-send"
+            class="p-button-rounded p-button-warning p-button-xl" (click)="submitPromotion()"></button>
+          <button pButton pRipple type="button" label="Cancle" icon="pi pi-exclamation-triangle
+          " class="p-button-rounded p-button-danger p-button-xl ml-5" (click)="clearForm();"></button>
+        </div>
+        <!-- <p-confirmDialog [style]="{width: '450px'}">
+              </p-confirmDialog> -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<app-footer></app-footer>
