@@ -102,8 +102,8 @@ namespace ProjectTest.Controllers
             await _context.SaveChangesAsync();
 
             // save to file txt
-            await Utility.Helpers.SaveTxtFilePromotion(formatId, promotionData, _env);
-            await Utility.Helpers.SaveTxtFileStores("promo_"+formatId, storeData, _env);
+            await Utility.Helpers.SaveTxtFilePromotion(formatId, promotionData);
+            await Utility.Helpers.SaveTxtFileStores("promo_"+formatId, storeData);
 
             return new PayloadDto
             {

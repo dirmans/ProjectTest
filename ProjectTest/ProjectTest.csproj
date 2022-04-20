@@ -33,4 +33,8 @@
     <Folder Include="Resources\PromotionFile\" />
   </ItemGroup>
 
+	<Target Name="CreateAppDataFolder" AfterTargets="AfterPublish">
+		<MakeDir Directories="$(PublishDir)Resources" Condition="!Exists('$(PublishDir)Resources')" />
+	</Target>
+
 </Project>
