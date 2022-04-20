@@ -14,9 +14,9 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'promotion', component: PromotionComponent },
+      { path: '**', component: HomeComponent, pathMatch: 'full' }
     ]
   },
-  { path: '**', component: HomeComponent, pathMatch: 'full' }
 ];
 
 @NgModule({

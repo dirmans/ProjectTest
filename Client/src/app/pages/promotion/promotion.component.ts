@@ -116,9 +116,7 @@ export class PromotionComponent implements OnInit {
   }
 
   onRemove(event: any) {
-    this.file = event.files;
-
-    //this.applyForm.controls['imageInput'].setValue(this.file ? this.file.name : null);
+    this.file = [];
   }
 
   onRowSelect(event: any) {

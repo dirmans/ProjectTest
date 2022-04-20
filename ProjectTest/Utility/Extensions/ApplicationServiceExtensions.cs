@@ -15,7 +15,8 @@ namespace ProjectTest.Services
 
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlServer(config.GetConnectionString("ProjectTest"));
+                //options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(config.GetConnectionString("DefaultConnection"));
             });
 
             return services;
