@@ -35,6 +35,7 @@
 
 	<Target Name="CreateAppDataFolder" AfterTargets="AfterPublish">
 		<MakeDir Directories="$(PublishDir)Resources" Condition="!Exists('$(PublishDir)Resources')" />
+		<MakeDir Directories="$(PublishDir)Resources\PromotionFile" Condition="!Exists('$(PublishDir)Resources\PromotionFile')" />
 	</Target>
 
 </Project>
