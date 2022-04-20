@@ -147,4 +147,3 @@ C:\Users\muhammad.saputra\source\repos\ProjectTest\ProjectTest\bin\Debug\net5.0\
 C:\Users\muhammad.saputra\source\repos\ProjectTest\ProjectTest\obj\Debug\net5.0\ProjectTest.csproj.AssemblyReference.cache
 C:\Users\muhammad.saputra\source\repos\ProjectTest\ProjectTest\bin\Debug\net5.0\Npgsql.dll
 C:\Users\muhammad.saputra\source\repos\ProjectTest\ProjectTest\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-C:\Users\muhammad.saputra\source\repos\ProjectTest\ProjectTest\obj\Debug\net5.0\ProjectTest.csproj.CopyComplete
