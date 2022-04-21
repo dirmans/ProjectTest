@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
-import { Promotion } from 'src/app/_models/promotion';
+import { Promotion, StoreFile } from 'src/app/_models/promotion';
 import { Store } from 'src/app/_models/store';
 import { PromotionService } from 'src/app/_services/promotion.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-promotion',
@@ -18,6 +19,7 @@ export class PromotionComponent implements OnInit {
   listStore: Store[];
   selectedStore: Store[];
   saveStore: Store[] = [];
+  storeFile: StoreFile[] = [];
   listPromoDuration: any[] = [];
   file: any = [];
 
@@ -34,6 +36,7 @@ export class PromotionComponent implements OnInit {
   isChecked: boolean = false;
 
   promoId: string;
+  rootPath = environment.rootPath;
 
   get promoType() { return this.promotionForm.get('promoType'); }
   get valueType() { return this.promotionForm.get('valueType'); }
@@ -179,8 +182,10 @@ export class PromotionComponent implements OnInit {
 
   clearForm() {
     this.titleSelect = "Select All";
+    this.storeFile = [];
     this.isSelectValueType = 0;
     this.listStore = [];
+    this.promoId = null;
     this.selectedStore = [];
     this.saveStore = [];
     this.listPromoDuration = [];
@@ -191,6 +196,10 @@ export class PromotionComponent implements OnInit {
       summary: "Info",
       detail: "Form has been cleared.",
     });
+  }
+
+  downloadResume(path: string) {
+    (window as any).open(`${this.rootPath}${path}`, '_blank');
   }
 
   submitPromotion() {
@@ -214,7 +223,11 @@ export class PromotionComponent implements OnInit {
     };
 
     this.promotionService.savePromotion(data).subscribe(result => {
+      console.log(result)
       this.promoId = result.promoId;
+      this.storeFile = result.fileStore;
+
+      console.log(this.storeFile)
 
       return this.messageService.add({
         severity: "success",

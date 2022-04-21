@@ -130,6 +130,13 @@
                       <small *ngIf="promoDuration.errors?.required" style="color: red;">Promo type is required.</small>
                     </div>
                   </div>
+                  <div class="form-group">
+                    <ul class="mt-5" *ngFor="let item of storeFile">
+                      <li>{{ item.fileName }} <button type="button" class="btn btn-success btn-sm mt-1 mb-1 mr-1"
+                          (click)="downloadResume(item.filePath)" pTooltip="View" tooltipPosition="top"><i
+                            class="fa fa-search"></i> View</button></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>

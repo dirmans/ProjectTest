@@ -11,4 +11,10 @@ export interface Promotion {
 
 export interface Payload {
   promoId: string;
+  storeFile: StoreFile;
+}
+
+export interface StoreFile {
+  fileName: string;
+  filePath: string;
 }

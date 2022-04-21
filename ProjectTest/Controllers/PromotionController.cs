@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ProjectTest.Data;
 using ProjectTest.DTOs;
 using ProjectTest.Model;
@@ -12,7 +11,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectTest.Controllers
@@ -104,12 +102,27 @@ namespace ProjectTest.Controllers
             await _context.SaveChangesAsync();
 
             // save to file txt
-            await Utility.Helpers.SaveTxtFilePromotion(formatId, promotionData);
-            await Utility.Helpers.SaveTxtFileStores("promo_"+formatId, storeData);
+            var pathPromotionFile = await Utility.Helpers.SaveTxtFilePromotion(formatId, promotionData);
+            var pathStoreFile = await Utility.Helpers.SaveTxtFileStores("promo_" + formatId, storeData);
+
+            var listFile = new List<FileStore>();
+
+            listFile.Add(new FileStore
+            {
+                FileName = pathPromotionFile.Item1,
+                FilePath = pathPromotionFile.Item2
+            });
+
+            listFile.Add(new FileStore
+            {
+                FileName = pathStoreFile.Item1,
+                FilePath = pathStoreFile.Item2
+            });
 
             return new PayloadDto
             {
-                PromoId = formatId
+                PromoId = formatId,
+                FileStore = listFile
             };
         }
 
