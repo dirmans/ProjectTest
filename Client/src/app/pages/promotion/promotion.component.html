@@ -35,8 +35,9 @@
                 <div class="p-fluid p-grid p-formgrid">
                   <div class="form-group">
                     <span class="p-float-label">
-                      <input pInputText formControlName="promoId" [disabled]="isDisabled" />
-                      <label for="promotionId">Promo ID</label>
+                      <input style="opacity: 1;" pInputText [value]="promoId ? promoId : null"
+                        [disabled]="isDisabled" />
+                      <label for="promoId">Promo ID</label>
                     </span>
                   </div>
                   <div class="form-group">
@@ -72,9 +73,8 @@
                       <div class="col-md-5">
                         <div class="form-group" *ngIf="isSelectValueType == 1">
                           <span class="p-float-label">
-                            <input pInputText formControlName="valuePercentage" type="number" min="0" max="100"
-                              [pKeyFilter]="numberRegex" [ngClass]="{'ng-invalid ng-dirty': valuePercentage.errors && (valuePercentage.touched || valuePercentage.dirty),
-                            'is-valid':valuePercentage.valid}" />
+                            <p-inputNumber formControlName="valuePercentage" [min]="0" [max]="100" suffix="%" [ngClass]="{'ng-invalid ng-dirty': valuePercentage.errors && (valuePercentage.touched || valuePercentage.dirty),
+                            'is-valid':valuePercentage.valid}"></p-inputNumber>
                             <label for="promotionId">Percentage</label>
                             <div *ngIf="valuePercentage.invalid && (valuePercentage.dirty || valuePercentage.touched)">
                               <small *ngIf="valuePercentage.errors?.required" style="color: red;">This value percentage
@@ -86,9 +86,9 @@
                         </div>
                         <div class="form-group" *ngIf="isSelectValueType == 2">
                           <span class="p-float-label">
-                            <input pInputText formControlName="valueAmount" type="number" min="0" max="999999999"
-                              [pKeyFilter]="numberRegex" [ngClass]="{'ng-invalid ng-dirty': valueAmount.errors && (valueAmount.touched || valueAmount.dirty),
-                            'is-valid':valueAmount.valid}" />
+                            <p-inputNumber formControlName="valueAmount" mode="decimal" [min]="0" [max]="999999999"
+                              [ngClass]="{'ng-invalid ng-dirty': valueAmount.errors && (valueAmount.touched || valueAmount.dirty),
+                            'is-valid':valueAmount.valid}"></p-inputNumber>
                             <label for="promotionId">Amount</label>
                             <div *ngIf="valueAmount.invalid && (valueAmount.dirty || valueAmount.touched)">
                               <small *ngIf="valueAmount.errors?.required" style="color: red;">This value amount is
@@ -149,9 +149,6 @@
                     <div *ngIf="itemPath.invalid && (itemPath.dirty || itemPath.touched)">
                       <small *ngIf="itemPath.errors?.required" style="color: red;">Resume is required.</small>
                     </div>
-                    <!-- <div *ngIf="!imageInput">
-                    <small style="color: red;">Resume is required.</small>
-                  </div> -->
                   </div>
                 </div>
               </div>
@@ -162,11 +159,11 @@
                     <p-card>
                       <p-table [value]="listStore" [(selection)]="selectedStore" selectionMode="multiple"
                         (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
-                        responsiveLayout="scroll" [paginator]="true" [rows]="5" [metaKeySelection]="false">
+                        responsiveLayout="scroll" [paginator]="true" [rows]="5">
                         <ng-template pTemplate="header">
                           <tr>
                             <th style="width: 3rem">
-                              <p-button (onClick)="onSelectAll()" *ngIf="itemPath.value != null || undefined">
+                              <p-button (onClick)="onSelectAll($event)" *ngIf="itemPath.value != null || undefined">
                                 {{ titleSelect }}
                               </p-button>
                             </th>
@@ -176,11 +173,8 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-item let-i="rowIndex">
                           <tr>
-                            <td *ngIf="isSelectAll">
-                              <p-tableCheckbox [value]="item"></p-tableCheckbox>
-                            </td>
-                            <td *ngIf="!isSelectAll">
-                              <p-checkbox [pSelectableRow]="item" [pSelectableRowIndex]="i" [value]="item"></p-checkbox>
+                            <td>
+                              <p-tableCheckbox [index]="i" [value]="item"></p-tableCheckbox>
                             </td>
                             <td>{{item.store}}</td>
                             <td>{{item.storeName}}</td>

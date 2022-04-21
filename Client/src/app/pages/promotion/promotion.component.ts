@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { Promotion } from 'src/app/_models/promotion';
 import { Store } from 'src/app/_models/store';
@@ -31,6 +31,9 @@ export class PromotionComponent implements OnInit {
   isUpload: boolean;
   isSelectAll: boolean;
   isDisabled: boolean = true;
+  isChecked: boolean = false;
+
+  promoId: string;
 
   get promoType() { return this.promotionForm.get('promoType'); }
   get valueType() { return this.promotionForm.get('valueType'); }
@@ -40,7 +43,7 @@ export class PromotionComponent implements OnInit {
   get promoDuration() { return this.promotionForm.get('promoDuration'); }
   get itemPath() { return this.promotionForm.get('itemPath'); }
 
-  constructor(private formBuilder: FormBuilder, private promotionService: PromotionService, private messageService: MessageService) {
+  constructor(private primeNg: PrimeNGConfig, private formBuilder: FormBuilder, private promotionService: PromotionService, private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -57,6 +60,8 @@ export class PromotionComponent implements OnInit {
     this.initializeForm();
 
     this.isDisabled = true;
+
+    this.primeNg.ripple = true;
   }
 
   initializeForm() {
@@ -109,7 +114,14 @@ export class PromotionComponent implements OnInit {
       this.isUpload = true;
     }, error => {
       this.isUpload = false;
-      console.log(error);
+      this.listStore = [];
+      this.promotionForm.controls['itemPath'].setValue(null);
+
+      return this.messageService.add({
+        severity: "error",
+        summary: "error",
+        detail: "Please check your format file.",
+      });
     });
 
     //this.applyForm.controls['imageInput'].setValue(this.file ? this.file.name : '');
@@ -122,6 +134,7 @@ export class PromotionComponent implements OnInit {
   onRowSelect(event: any) {
     // simply loggin the event,
     // u can do something else with the data
+    console.log(event)
 
     this.saveStore.push(
       {
@@ -136,32 +149,30 @@ export class PromotionComponent implements OnInit {
 
   onRowUnselect(event: any) {
     // simply logging the event
+    console.log(event)
+    this.saveStore.splice(event.store, 1);
 
-    this.saveStore.splice(event.index, 1);
-
-    console.log(this.saveStore)
+    console.log(this.saveStore);
     this.promotionForm.get('storeList').setValue(this.saveStore);
   }
 
-  onSelectAll() {
-
+  onSelectAll(event: any) {
+    console.log(event)
     if (this.isSelectAll) {
-
       this.isSelectAll = false;
       this.selectedStore = [];
       this.saveStore = [];
-      console.log(this.saveStore)
 
       this.promotionForm.get('storeList').setValue(null);
+      console.log(this.saveStore)
       this.titleSelect = "Select All";
     } else {
-
       this.isSelectAll = true;
       this.selectedStore = [...this.listStore];
       this.saveStore = this.selectedStore;
-      console.log(this.saveStore)
 
       this.promotionForm.get('storeList').setValue(this.saveStore);
+      console.log(this.saveStore)
       this.titleSelect = "Unselect All";
     }
   }
@@ -174,6 +185,12 @@ export class PromotionComponent implements OnInit {
     this.saveStore = [];
     this.listPromoDuration = [];
     this.promotionForm.reset();
+
+    return this.messageService.add({
+      severity: "info",
+      summary: "Info",
+      detail: "Form has been cleared.",
+    });
   }
 
   submitPromotion() {
@@ -197,7 +214,7 @@ export class PromotionComponent implements OnInit {
     };
 
     this.promotionService.savePromotion(data).subscribe(result => {
-      this.promotionForm.get("promoId").setValue(result.promoId);
+      this.promoId = result.promoId;
 
       return this.messageService.add({
         severity: "success",

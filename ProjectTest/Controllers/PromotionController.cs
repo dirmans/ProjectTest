@@ -1,4 +1,5 @@
 ﻿using ExcelDataReader;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace ProjectTest.Controllers
 {
+    [Authorize]
     public class PromotionController : BaseApiController
     {
         private readonly DataContext _context;
