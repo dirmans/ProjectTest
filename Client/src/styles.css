@@ -3,17 +3,6 @@
 @import './assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
 @import './assets/dist/css/adminlte.min.css';
 @import './assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
-/* Mandatory */
-@import '~ng-wizard/themes/ng_wizard.min.css';
-
-/* Optional */
-/* If a theme other than default is used, the css file for that theme is required. */
-@import '~ng-wizard/themes/ng_wizard_theme_arrows.min.css';
-@import '~ng-wizard/themes/ng_wizard_theme_circles.min.css';
-@import '~ng-wizard/themes/ng_wizard_theme_dots.min.css';
-
-/* Material Theme */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 
 html,

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { FileUpload } from '../_models/fileUpload';
 import { Payload, Promotion } from '../_models/promotion';
 import { Store } from '../_models/store';
 

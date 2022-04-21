@@ -34,7 +34,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.css",
@@ -42,7 +41,6 @@
               "node_modules/primeng/resources/themes/lara-light-indigo/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeflex/primeflex.css",
-              "node_modules/ngx-easy-table/style.css",
               "node_modules/quill/dist/quill.core.css",
               "node_modules/quill/dist/quill.snow.css"
             ],
@@ -52,8 +50,7 @@
               "src/assets/plugins/bootstrap/js/bootstrap.bundle.min.js",
               "src/assets/dist/js/adminlte.min.js",
               "src/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
-              "node_modules/quill/dist/quill.js",
-              "src/assets/portal/js/scripts.js"
+              "node_modules/quill/dist/quill.js"
             ]
           },
           "configurations": {
@@ -121,14 +118,12 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/lara-light-indigo/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeflex/primeflex.css",
-              "node_modules/ngx-easy-table/style.css",
               "node_modules/quill/dist/quill.core.css",
               "node_modules/quill/dist/quill.snow.css"
             ],
@@ -138,8 +133,7 @@
               "src/assets/plugins/bootstrap/js/bootstrap.bundle.min.js",
               "src/assets/dist/js/adminlte.min.js",
               "src/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
-              "node_modules/quill/dist/quill.js",
-              "src/assets/portal/js/scripts.js"
+              "node_modules/quill/dist/quill.js"
             ]
           }
         }
