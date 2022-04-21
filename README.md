@@ -1,5 +1,5 @@
 # ProjectTest
 
 Example account : 
-username : lordvee
-password : visionet21@43
+username : testaccount
+password : account21@43
